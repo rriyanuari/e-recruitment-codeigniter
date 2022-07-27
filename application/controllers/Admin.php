@@ -27,33 +27,6 @@ class Admin extends CI_Controller {
       $this->load->view('templates/admin/index.php', $data);
     }
 
-    public function papan_jadwal()
-    {
-      $this->load->model(['Model_pemesanan']);
-  
-      $tanggal_papan_jadwal = date("Y-m-d");
-  
-      if($this->input->get('tanggal_papan_jadwal') != "" ){
-        $tanggal_papan_jadwal = $this->input->get('tanggal_papan_jadwal');
-      }
-  
-      $tanggal2 = new DateTime($tanggal_papan_jadwal);
-      $tanggal2->modify('+1 day');
-      $tanggal2 = $tanggal2->format('Y-m-d');
-  
-      $pemesanan_data	=	$this->Model_pemesanan->where_success_by_tanggal_join_pelanggan($tanggal_papan_jadwal, $tanggal2)->result_array();
-      $data = [
-        'title' 		=> 'Papan Jadwal',
-        'page' 			=> 'papan_jadwal',
-        'tgl_cari' 	=>  $tanggal_papan_jadwal,					
-        'pemesanans' => $pemesanan_data					
-      ];
-  
-      $this->load->view('templates/admin/index.php', $data);
-      $this->load->view('function/admin/papan_jadwal.php');
-  
-    }
-
     public function master_user()
     {
       $this->load->model(['Model_user']);
@@ -156,122 +129,104 @@ class Admin extends CI_Controller {
       }
     }
 
-
-    public function pelanggan_master()
+    public function lowongan_master()
     {
-      $this->load->model(['Model_pelanggan']);
+      $this->load->model(['Model_lowongan']);
 
-      $pelanggan_data	=	$this->Model_pelanggan->semua()->result_array();
+      $data_lowongan	=	$this->Model_lowongan->semua()->result_array();
       $data = [
-        'title' 				=> 'Data Pelanggan',
-        'page' 					=> 'pelanggan_master',
-        'pelanggans'			=> $pelanggan_data
+        'title' 		=> 'Data lowongan',
+        'page' 			=> 'lowongan_master',
+        'lowongans'			=> $data_lowongan			
       ];
       $this->load->view('templates/admin/index.php', $data);
-      $this->load->view('function/admin/pelanggan.php');
+      $this->load->view('function/admin/lowongan.php');
     }
-
-    public function pelanggan_tambah()
+    
+    public function lowongan_tambah()
     {
       $data = [
-        'title' 		=> 'Tambah Pelanggan ',
-        'page' 			=> 'pelanggan_tambah',
+        'title' 		=> 'Tambah lowongan',
+        'page' 			=> 'lowongan_tambah',
       ];
       $this->load->view('templates/admin/index.php', $data);
-      $this->load->view('function/admin/pelanggan.php');
+      $this->load->view('function/admin/lowongan.php');
     }
 
-    public function pelanggan_proses_tambah()
+    public function lowongan_proses_tambah()
     {
-      $this->load->model(['Model_pelanggan']);
-      $this->load->model(['Model_user']);
+      $this->load->model(['Model_lowongan']);
   
-      $pelanggan = $this->input->post('pelanggan');
-      $email    = $this->input->post('email');
-      $hp       = $this->input->post('hp');
-      $jeniskelamin = $this->input->post('jeniskelamin');
+      $judul = $this->input->post('judul');
+      $deskripsi = $this->input->post('deskripsi');
+      $status = $this->input->post('status');
   
       $data = array(
-        'pelanggan'       => $pelanggan,
-        'email'           => $email,
-        'no_hp'           => $hp,
-        'jenis_kelamin'   => $jeniskelamin,
-        'tgl_bergabung'   => Date('Y-m-d H:i:s')
+        'judul'        => $judul,
+        'deskripsi'       => $deskripsi,
+        'status_aktif'    => $status,
         );
       
-      $insert = $this->Model_pelanggan->tambah($data,'t_pelanggan');
+      $insert = $this->Model_lowongan->tambah($data,'lowongan');
+      
       if($insert){
-        $data2 = array(
-          'username'       => $pelanggan,
-          'password'       => "12345",
-          'role'           => 1,
-          );
-        $insert2 = $this->Model_user->tambah($data2,'t_user');
-        if($insert2){
-          echo "success";
-        }
+        echo "success";
       } else{
         echo "error";
-        
       }    
     }
 
-    public function pelanggan_proses_hapus()
+    public function lowongan_proses_hapus()
     {
-      $this->load->model(['Model_pelanggan']);
-      $this->load->model(['Model_user']);
+      $this->load->model(['Model_lowongan']);
   
       $id = $this->input->post('id');
-      $id_user = $this->Model_pelanggan->semua_join_user_by_id($id)->row_array();
-      $id_user = $id_user['id_user'];
-      if($this->Model_pelanggan->hapus_by_id($id)){
-        if($this->Model_user->hapus_by_id($id_user)){
-          echo "success";
-        }
+  
+      if($this->Model_lowongan->hapus_by_id($id)){
+        echo "success";
       } else{
         echo "error";
         
-      }    
+      }
     }
 
-    public function pelanggan_edit($id)
+    public function lowongan_edit($id)
     {
-      $this->load->model(['Model_pelanggan']);
+      $this->load->model(['Model_lowongan']);
       
-      $data_pelanggan	=	$this->Model_pelanggan->by_id($id)->row_array();
+      $data_lowongan	=	$this->Model_lowongan->by_id($id)->row_array();
       $data = [
-        'title' 		=> 'Edit pelanggan',
-        'page' 			=> 'pelanggan_edit',
-        'pelanggan'  => $data_pelanggan,	
+        'title' 		=> 'Edit lowongan',
+        'page' 			=> 'lowongan_edit',
+        'lowongan'  => $data_lowongan,	
       ];
       $this->load->view('templates/admin/index.php', $data);
-      $this->load->view('function/admin/pelanggan.php');
+      $this->load->view('function/admin/lowongan.php');
     }
 
-    public function pelanggan_proses_edit()
+    public function lowongan_proses_edit()
     {
-      $this->load->model(['Model_pelanggan']);
+      $this->load->model(['Model_lowongan']);
 
       $id = $this->input->post('id');
-      $pelanggan = $this->input->post('pelanggan');
-      $email    = $this->input->post('email');
-      $hp       = $this->input->post('hp');
-      $jeniskelamin = $this->input->post('jeniskelamin');
+  
+      $judul = $this->input->post('judul');
+      $deskripsi = $this->input->post('deskripsi');
+      $status = $this->input->post('status');
+
+      if($status == 'true') $status = TRUE;
   
       $data = array(
-        'pelanggan'        => $pelanggan,
-        'email'           => $email,
-        'no_hp'           => $hp,
-        'jenis_kelamin'   => $jeniskelamin,
-        'tgl_bergabung'   => Date('Y-m-d H:i:s')
-        );
-
-
-      $where = array(
-        'id_pelanggan' => $id
+        'judul'        => $judul,
+        'deskripsi'       => $deskripsi,
+        'status_aktif'    => $status,
       );
 
-      if($this->Model_pelanggan->update_by_id($where,$data,'t_pelanggan')){
+      $where = array(
+        'id' => $id
+      );
+
+      if($this->Model_lowongan->update_by_id($where,$data,'lowongan')){
         echo "success";
       } else{
         echo "error";

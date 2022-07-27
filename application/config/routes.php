@@ -42,23 +42,12 @@ $route['default_controller'] = 'user/index';
         $route['admin/edit-user/(:any)'] = 'admin/edit_user/$1';
         $route['admin/proses-edit-user'] = 'admin/proses_edit_user';
 
-      $route['admin/pelanggan'] = 'admin/pelanggan_master';
-        $route['admin/pelanggan-tambah'] = 'admin/pelanggan_tambah';
-        $route['admin/pelanggan-proses-tambah'] = 'admin/pelanggan_proses_tambah';
-        $route['admin/pelanggan-proses-hapus'] = 'admin/pelanggan_proses_hapus';
-        $route['admin/pelanggan-edit/(:any)'] = 'admin/pelanggan_edit/$1';
-        $route['admin/pelanggan-proses-edit'] = 'admin/pelanggan_proses_edit';
-
-      $route['admin/lapangan'] = 'admin/lapangan_master';
-        $route['admin/lapangan-tambah'] = 'admin/lapangan_tambah';
-        $route['admin/lapangan-proses-tambah'] = 'admin/lapangan_proses_tambah';
-        $route['admin/lapangan-proses-hapus'] = 'admin/lapangan_proses_hapus';
-        $route['admin/lapangan-edit/(:any)'] = 'admin/lapangan_edit/$1';
-        $route['admin/lapangan-proses-edit'] = 'admin/lapangan_proses_edit';
-
-      $route['admin/pemesanan'] = 'admin/pemesanan';
-        $route['admin/pemesanan-proses-edit'] = 'admin/pemesanan_proses_edit';
-        $route['admin/pemesanan-proses-hapus'] = 'admin/pemesanan_proses_hapus';
+      $route['admin/lowongan'] = 'admin/lowongan_master';
+        $route['admin/lowongan-tambah'] = 'admin/lowongan_tambah';
+        $route['admin/lowongan-proses-tambah'] = 'admin/lowongan_proses_tambah';
+        $route['admin/lowongan-proses-hapus'] = 'admin/lowongan_proses_hapus';
+        $route['admin/lowongan-edit/(:any)'] = 'admin/lowongan_edit/$1';
+        $route['admin/lowongan-proses-edit'] = 'admin/lowongan_proses_edit';
 
       $route['admin/laporan'] = 'admin/laporan';
         $route['admin/laporan-print'] = 'admin/laporan_print';

@@ -30,7 +30,7 @@
           success:function(response){
             if (response == 'success') {
               window.alert('Login berhasil, anda akan dialihkan');
-              window.location.href =`<?php echo base_url('admin')?>`;
+              window.location.href =`<?php echo base_url('admin/dashboard')?>`;
               // swalTemplate('success', 'Login Berhasil!!', 'Anda akan dialihkan', go_to('admin'))
             } else {
               // swalTemplate('error', 'Login Gagal!', 'data yang anda masukan salah');

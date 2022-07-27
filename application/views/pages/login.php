@@ -31,7 +31,7 @@
 
         <div class="card-body login-card-body">
             <div class="text-center mb-3">
-                <img src="<?=base_url('public/')?>img/logo.jpeg" class="image img-circle elevation-2" style="max-width:150px">
+                <!-- <img src="<?=base_url('public/')?>img/logo.jpeg" class="image img-circle elevation-2" style="max-width:150px"> -->
             </div>
             <p class="login-box-msg">Silahkan Login</p>
 

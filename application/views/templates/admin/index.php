@@ -22,6 +22,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/components.css">
 
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.css">
+
   <body>
     <div id="app">
       <div class="main-wrapper main-wrapper-1">
@@ -42,7 +44,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <i class="far fa-user"></i> Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item has-icon text-danger">
+                <a href="#" class="dropdown-item has-icon text-danger"
+                    data-confirm="Logout?|Apakah anda yakin ingin logout?" data-confirm-yes="window.location.href =`<?php echo base_url('logout')?>`">
                   <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
               </div>
@@ -62,7 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="<?php echo $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>admin/dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
             
             <li class="menu-header">Master Data</li>
-            <li class="<?php echo $this->uri->segment(2) == 'pelanggan' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>admin/pelanggan"><i class="fas fa-briefcase"></i> <span>Lowongan</span></a></li>
+            <li class="<?php echo $this->uri->segment(2) == 'lowongan' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>admin/lowongan"><i class="fas fa-briefcase"></i> <span>Lowongan</span></a></li>
             <li class="<?php echo $this->uri->segment(2) == 'soal' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>soal"><i class="fas fa-question-circle"></i> <span>Soal Tes</span></a></li>
 
             <li class="menu-header">Perekrutan</li>
@@ -112,5 +115,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- Template JS File -->
   <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
   <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+
+  <script src="<?php echo base_url(); ?>assets/modules/summernote/summernote-bs4.js"></script>
+
+  <script>
+  $('.summernote').summernote({
+    placeholder: 'Isi deskripsi di sini',
+    tabsize: 2,
+    height: 100,
+    toolbar: [
+        ['para', ['ul']],
+      ]
+  });
+</script>
+
 </body>
 </html>
