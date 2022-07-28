@@ -26,12 +26,12 @@
 <!-- /.login-logo -->
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="<?=base_url('');?>" class="h1">Temon Futsal</a>
+            <a href="<?=base_url('');?>" class="h4">PT. Putra Sinar Baru Sejati</a>
         </div>
 
         <div class="card-body login-card-body">
             <div class="text-center mb-3">
-                <!-- <img src="<?=base_url('public/')?>img/logo.jpeg" class="image img-circle elevation-2" style="max-width:150px"> -->
+                <img src="<?=base_url('public/')?>img/logo.png" class="image img-circle elevation-2" style="max-width:150px">
             </div>
             <p class="login-box-msg">Silahkan Login</p>
 

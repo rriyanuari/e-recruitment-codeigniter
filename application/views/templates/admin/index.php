@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <body>
     <div id="app">
       <div class="main-wrapper main-wrapper-1">
-        <div class="navbar-bg"></div>
+        <div class="navbar-bg bg-danger"></div>
         <nav class="navbar navbar-expand-lg main-navbar">
           <form class="form-inline mr-auto">
             <ul class="navbar-nav mr-3">
@@ -56,10 +56,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="<?php echo base_url(); ?>dist/index">Stisla</a>
+            <img src="<?=base_url('public/')?>img/logoAlt.png" class="image" width="200">
+            <!-- <a href="<?php echo base_url(); ?>dist/index">Stisla</a> -->
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="<?php echo base_url(); ?>dist/index">St</a>
+            <img src="<?=base_url('public/')?>img/logo.png" class="image" width="50">
           </div>
           <ul class="sidebar-menu">
             <li class="<?php echo $this->uri->segment(2) == 'dashboard' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>admin/dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
