@@ -17,15 +17,8 @@ $route['default_controller'] = 'user/index';
 
 // User
   $route['home'] = 'user/index';
-  $route['papan-jadwal'] = 'user/papan_jadwal';
-  $route['papan-jadwal/(:any)'] = 'user/papan_jadwal_tanggal/$1';
-  $route['pemesanan'] = 'user/pemesanan';
-    $route['tambah-pemesanan'] = 'user/pemesanan_tambah';
-      $route['pemesanan-proses-tambah'] = 'user/pemesanan_proses_tambah';
-      $route['pemesanan-proses-edit'] = 'user/pemesanan_proses_edit';
-    $route['edit-pemesanan/(:any)'] = 'user/pemesanan_edit/$1';
-    $route['pemesanan-proses-hapus'] = 'user/pemesanan_proses_hapus';
-
+  $route['lowongan'] = 'user/lowongan';
+  $route['status-lamaran'] = 'user/status_lamaran';
 
 // ----------
 

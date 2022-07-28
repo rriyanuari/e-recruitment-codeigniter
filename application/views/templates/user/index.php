@@ -27,16 +27,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="main-wrapper container">
       <div class="navbar-bg bg-danger"></div>
       <nav class="navbar navbar-expand-lg main-navbar pt-5">
-        <img src="<?=base_url('public/')?>img/logo.png" class="image rounded-circle" width="100">
-        <!-- <a href="<?php echo base_url(); ?>dist/index" class="navbar-brand sidebar-gone-hide">Stisla</a> -->
+        <!-- <img src="<?=base_url('public/')?>img/logoAlt.png" class="image rounded mr-5" width="200"> -->
         <div class="nav-collapse">
           <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
             <i class="fas fa-ellipsis-v"></i>
           </a>
           <ul class="navbar-nav">
-            <li class="nav-item active"><a href="#" class="nav-link">Beranda</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Lowongan</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Status Lamaran</a></li>
+            <li class="nav-item active"><a href="<?= base_url(); ?>" class="nav-link">Beranda</a></li>
+            <li class="nav-item"><a href="<?= base_url('lowongan'); ?>" class="nav-link">Lowongan</a></li>
+            <li class="nav-item"><a href="<?= base_url('status-lamaran'); ?>" class="nav-link">Status Lamaran</a></li>
           </ul>
         </div>
         <ul class="navbar-nav ml-auto">
@@ -62,18 +61,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
       <!-- Main Content -->
       <div class="main-content">
-        <section class="section">
+        <section class="section mt-5">
           <?php $this->load->view('pages/user/'.$page); ?>
         </section>
       </div>
 
-      <footer class="main-footer container">
-        <div class="footer-left">
-          Copyright &copy; 2022 <div class="bullet"></div> Design By Stisla
-        </div>
-        <div class="footer-right">
-          
-        </div>
+      <footer class="main-footer">
+          <div class="container">
+            Copyright &copy; 2022 <div class="bullet"></div> Design By Stisla
+          </div> 
       </footer>
     </div>
   </div>
