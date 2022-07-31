@@ -9,9 +9,7 @@ class User extends CI_Controller {
     if($this->session->userdata('role') == 2 ){
       redirect(base_url('admin'));
     }
-
-		if($this->session->userdata('role') == 1 ){
-    }
+		
   }
 
 	public function index()

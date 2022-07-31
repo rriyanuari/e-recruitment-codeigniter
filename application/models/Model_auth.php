@@ -2,7 +2,7 @@
 
   class Model_auth extends CI_Model {
 
-    public function get_username($username){
+    public function getusername($username){
       $this->db->select("*");
       $this->db->from("t_user");
       $this->db->where("username", $username);
@@ -11,7 +11,7 @@
     }
 
     public function login($username, $password){
-      $user = $this->get_username($username);
+      $user = $this->getusername($username);
       if (!empty($user)) {
           if ($password == $user->password) {
               return $user;

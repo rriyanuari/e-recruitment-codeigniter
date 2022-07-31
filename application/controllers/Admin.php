@@ -64,7 +64,7 @@ class Admin extends CI_Controller {
         'password'       => $password,
         'role'           => $role,
         );
-      $insert = $this->Model_user->tambah($data,'t_user');
+      $insert = $this->Model_user->tambah($data,'user');
       
       if($insert){
         echo "success";
@@ -88,21 +88,21 @@ class Admin extends CI_Controller {
       }
     }
 
-    public function edit_user($id)
+    public function ediuser($id)
     {
       $this->load->model(['Model_user']);
 
       $data_user	=	$this->Model_user->by_id($id)->row_array();
       $data = [
         'title' 		=> 'Edit User',
-        'page' 			=> 'edit_user',
+        'page' 			=> 'ediuser',
         'user'			=> $data_user			
       ];
       $this->load->view('templates/admin/index.php', $data);
       $this->load->view('function/admin/user.php');
     }
 
-    public function proses_edit_user()
+    public function proses_ediuser()
     {
       $this->load->model(['Model_user']);
 
@@ -121,7 +121,7 @@ class Admin extends CI_Controller {
         'id_user' => $id
       );
 
-      if($this->Model_user->update_by_id($where,$data,'t_user')){
+      if($this->Model_user->update_by_id($where,$data,'user')){
         echo "success";
       } else{
         echo "error";
@@ -231,167 +231,6 @@ class Admin extends CI_Controller {
       } else{
         echo "error";
       }
-    }
-
-    public function lapangan_master()
-    {
-      $this->load->model(['Model_lapangan']);
-
-      $lapangan_data	=	$this->Model_lapangan->semua()->result_array();
-      $data = [
-        'title' 				=> 'Data lapangan ',
-        'page' 					=> 'lapangan_master',
-        'lapangans'			=> $lapangan_data
-      ];
-      $this->load->view('templates/admin/index.php', $data);
-      $this->load->view('function/admin/lapangan.php');
-    }
-
-    public function lapangan_tambah()
-    {
-      $data = [
-        'title' 		=> 'Tambah lapangan ',
-        'page' 			=> 'lapangan_tambah',
-      ];
-      $this->load->view('templates/admin/index.php', $data);
-      $this->load->view('function/admin/lapangan.php');
-    }
-
-    public function lapangan_proses_tambah()
-    {
-      $this->load->model(['Model_lapangan']);
-  
-      $lapangan = $this->input->post('lapangan');
-      $jenis = $this->input->post('jenis');
-      $weekday_siang = $this->input->post('weekday_siang');
-      $weekday_malam = $this->input->post('weekday_malam');
-      $weekend = $this->input->post('weekend');
-      $weekend_malam = $this->input->post('weekend_malam');
-  
-      $data = array(
-        'lapangan'       => $lapangan,
-        'jenis_lapangan'           => $jenis,
-        'weekday_siang'           => $weekday_siang,
-        'weekday_malam'   => $weekday_malam,
-        'weekend'   => $weekend,
-        'weekend_malam'   => $weekend_malam
-        );
-      
-      $insert = $this->Model_lapangan->tambah($data,'t_lapangan');
-
-      
-      if($insert){
-        echo "success";
-      } else{
-        echo "error";
-      }    
-    }
-
-    public function lapangan_proses_hapus()
-    {
-      $this->load->model(['Model_lapangan']);
-  
-      $id = $this->input->post('id');
-  
-      if($this->Model_lapangan->hapus_by_id($id)){
-        echo "success";
-      } else{
-        echo "error";
-        
-      }
-    }
-
-    public function lapangan_edit($id)
-    {
-      $this->load->model(['Model_lapangan']);
-      
-      $data_lapangan	=	$this->Model_lapangan->by_id($id)->row_array();
-      $data = [
-        'title' 		=> 'Edit lapangan',
-        'page' 			=> 'lapangan_edit',
-        'lapangan'  => $data_lapangan,	
-      ];
-      $this->load->view('templates/admin/index.php', $data);
-      $this->load->view('function/admin/lapangan.php');
-    }
-
-    public function lapangan_proses_edit()
-    {
-      $this->load->model(['Model_lapangan']);
-
-      $id = $this->input->post('id');
-      $lapangan = $this->input->post('lapangan');
-      $jenis = $this->input->post('jenis');
-      $weekday_siang = $this->input->post('weekday_siang');
-      $weekday_malam = $this->input->post('weekday_malam');
-      $weekend = $this->input->post('weekend');
-      $weekend_malam = $this->input->post('weekend_malam');
-  
-      $data = array(
-        'lapangan'       => $lapangan,
-        'jenis_lapangan'           => $jenis,
-        'weekday_siang'           => $weekday_siang,
-        'weekday_malam'   => $weekday_malam,
-        'weekend'   => $weekend,
-        'weekend_malam'   => $weekend_malam
-        );
-
-      $where = array(
-        'id_lapangan' => $id
-      );
-
-      if($this->Model_lapangan->update_by_id($where,$data,'t_lapangan')){
-        echo "success";
-      } else{
-        echo "error";
-      }
-    }
-
-    public function pemesanan()
-    {
-      $this->load->model(['Model_pemesanan']);
-
-      $pemesanan_data	=	$this->Model_pemesanan->semua_join_pelanggan()->result_array();
-      $data = [
-        'title' 				=> 'Data Pemesanan ',
-        'page' 					=> 'pemesanan',
-        'pemesanans'	  => $pemesanan_data
-      ];
-      $this->load->view('templates/admin/index.php', $data);
-      $this->load->view('function/admin/pemesanan.php');
-    }
-
-    public function pemesanan_proses_edit()
-    {
-      $this->load->model(['Model_pemesanan']);
-  
-      $id = $this->input->post('id');
-
-      $data = array(
-        'status'			=> 'success',
-        );
-      $where = array(
-        'id_pemesanan' => $id
-      );
-      if($this->Model_pemesanan->update_by_id($where,$data,'t_pemesanan')){
-        echo "success";
-      } else{
-        echo "error";
-        
-      }    
-    }
-
-    public function pemesanan_proses_hapus()
-    {
-      $this->load->model(['Model_pemesanan']);
-
-      $id = $this->input->post('id');
-      if($this->Model_pemesanan->hapus_by_id($id)){
-        echo "success";
-      } else{
-        echo "error";
-        
-      }    
     }
 
     public function laporan()

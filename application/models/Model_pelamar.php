@@ -1,6 +1,6 @@
 <?php
 
-  class Model_pelanggan extends CI_Model {
+  class Model_pelamar extends CI_Model {
 
       public function semua(){
           $query = $this->db  ->select('*')
@@ -35,7 +35,7 @@
       public function tambah($data, $table){
         $query = $this->db->insert($table, $data);
         return $query;
-        }
+      }
 
       public function hapus_by_id($id){
         $query = $this->db->delete('t_pelanggan', array('id_pelanggan' => $id));
@@ -47,4 +47,4 @@
                             ->update($table,$data);
         return $query;
       }	
-    }
+}

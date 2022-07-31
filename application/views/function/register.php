@@ -1,54 +1,61 @@
 <script>
   $(document).ready(function(){
 
-    $('#tmb_tambah_pelanggan').click(function() {
+    $('#tmb_register').click(function() {
       event.preventDefault();
 
       var username = $("input[name=username]");
       var password = $("input[name=password]");
-      var email = $("input[name=email]");
-      var hp = $("input[name=hp]");
-      var jeniskelamin = $('#jeniskelamin').val();
-      
+      var nama_lengkap = $("input[name=nama_lengkap]");
+      var jenis_kelamin = $('#jenis_kelamin').val();
+      var jenjang_pendidikan = $('#jenjang_pendidikan').val();
+      var cv = $("input#upload_cv");
+
+      var file_data = $(`#upload_cv`).prop('files')[0];
+      var form_data = new FormData();
+
+      form_data.append('file', file_data);
+      form_data.append('username', username.val());
+      form_data.append('password', password.val());
+      form_data.append('nama_lengkap', nama_lengkap.val());
+      form_data.append('jenis_kelamin', jenis_kelamin);
+      form_data.append('jenjang_pendidikan', jenjang_pendidikan);
+
       if(username.val().trim() == "") {
           alert('Username tidak boleh kosong');
           username.focus();
       }else if(password.val().trim() == "") {
         alert('Password tidak boleh kosong');
         password.focus();
-      }else if(email.val().trim() == "") {
-          alert('email tidak boleh kosong');
-          email.focus();
-      }else if(hp.val().trim() == "") {
-        alert('hp tidak boleh kosong');
-        hp.focus();
+      }else if(nama_lengkap.val().trim() == "") {
+          alert('nama lengkap tidak boleh kosong');
+          nama_lengkap.focus();
+      }else if(cv.val().trim() == "") {
+        alert('CV tidak boleh kosong');
+        cv.focus();
       } else {
-        r = confirm("Apakah anda yakin ingin menambahkan pelanggan ?");
+        r = confirm("Apakah anda yakin ingin membuat akun ?");
         if (r == true) {
           $.ajax({
-          url : '<?php echo base_url('register-proses')?>',
-          type : 'POST',
-          data : {  
-            username : username.val(),
-            password : password.val(),
-            email : email.val(),
-            hp : hp.val(),
-            jeniskelamin : jeniskelamin,
-          }, 
-            success:function(response){
-              if (response == "success") {
-                window.alert('Daftar berhasil dilakukan, silahkan login');
-                window.location.href =`<?php echo base_url('login')?>`;
-              } else {
-                alert('Daftar gagal dilakukan');
+          url : '<?php echo site_url('register-proses')?>',
+          dataType: 'json',  
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: form_data,
+          type: 'post',
+          success: function(data,status){
+              //alert(php_script_response); // display response from the PHP script, if any
+              if (data.status!='error') {
+                  $(`#upload_cv`).val('');
+                  alert('Akun berhasil dibuat');
+                  window.location.href =`<?php echo base_url()?>`;
+                  console.log(data.msg)
+              }else{
+                  alert(data.msg);
+                  console.log(data.msg);
               }
-              console.log(response);
-            },
-            error:function(response){
-              // swalTemplate('error', 'Opps!', 'kesalahan pada server');
-              alert('Kesalahan pada server');
-              console.log(response);
-            }
+          }
           });
         }
       }

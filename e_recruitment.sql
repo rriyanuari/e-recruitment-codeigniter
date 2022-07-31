@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Jul 2021 pada 14.09
+-- Waktu pembuatan: 31 Jul 2022 pada 22.51
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 5.6.40
 
@@ -19,10 +19,56 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `temon-futsal`
+-- Database: `e_recruitment`
 --
-CREATE DATABASE IF NOT EXISTS `temon-futsal` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `temon-futsal`;
+CREATE DATABASE IF NOT EXISTS `e_recruitment` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `e_recruitment`;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `lowongan`
+--
+
+CREATE TABLE `lowongan` (
+  `id` int(11) NOT NULL,
+  `judul` varchar(100) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `status_aktif` tinyint(1) NOT NULL,
+  `tgl_dibuat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `lowongan`
+--
+
+INSERT INTO `lowongan` (`id`, `judul`, `deskripsi`, `status_aktif`, `tgl_dibuat`) VALUES
+(1, 'Operator', '<ul><li>Usia 19 - 27 tahun</li><li>TB minimal 170</li><li>BB minimal 60</li><li>Lulusan SMK jurusan Teknik Mesin, Listrik (Elektrikal & Mechanical), Otomotif / SMA jurusan IPA</li><li>Memiliki kesehatan mata yang baik</li><li>Bersedia bekerja shift</li><li>Diutamakan yang berdomisili di Tangerang</li></ul>', 1, '2022-07-27 20:45:07'),
+(2, 'Supervisor', '<ul><li>Pria/wanita, usia maksimal 26 tahun</li><li>Fresh graduate atau pengalaman maks. 3 tahun</li><li>Familiar dan memiliki kemampuan programming</li><li>Mampu bekerja di dalam tim</li><li>Good communication skill</li><li>Good analytical thinking</li><li>Pendidikan S1 jurusan Teknik Komputer dan Informatika, Teknik Komputer, Teknik Infomatika</li><li>IPK minimal 2,87</li></ul>', 1, '2022-07-27 20:46:30');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pelamar`
+--
+
+CREATE TABLE `pelamar` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `nama_lengkap` varchar(100) NOT NULL,
+  `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
+  `jenjang_pendidikan` enum('SD','SMP','SMA/SMK','D3','S1') NOT NULL,
+  `cv` varchar(255) NOT NULL,
+  `tgl_dibuat` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pelamar`
+--
+
+INSERT INTO `pelamar` (`id`, `id_user`, `nama_lengkap`, `jenis_kelamin`, `jenjang_pendidikan`, `cv`, `tgl_dibuat`) VALUES
+(1, 19, 'Riyanuari', 'Laki-Laki', 'S1', '0232545e118ba0f304ce34bcddfa7ff7.pdf', '2022-07-31 22:16:40'),
+(2, 20, 'Aziz', 'Laki-Laki', 'D3', 'c5bfeec5cd52b152aab4ec3eb7934867.pdf', '2022-07-31 22:19:18');
 
 -- --------------------------------------------------------
 
@@ -117,13 +163,24 @@ CREATE TABLE `t_user` (
 
 INSERT INTO `t_user` (`id_user`, `username`, `password`, `role`) VALUES
 (1, 'admin', 'admin', 2),
-(15, 'andy', '12345', 1),
-(16, 'subki', '12345', 1),
-(18, 'sandi', 'okydoky', 1);
+(19, 'riyanuari', '12345', 1),
+(20, 'aziz', 'aziz123', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `lowongan`
+--
+ALTER TABLE `lowongan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `pelamar`
+--
+ALTER TABLE `pelamar`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `t_lapangan`
@@ -154,6 +211,18 @@ ALTER TABLE `t_user`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `lowongan`
+--
+ALTER TABLE `lowongan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `pelamar`
+--
+ALTER TABLE `pelamar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `t_lapangan`
 --
 ALTER TABLE `t_lapangan`
@@ -175,7 +244,7 @@ ALTER TABLE `t_pemesanan`
 -- AUTO_INCREMENT untuk tabel `t_user`
 --
 ALTER TABLE `t_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

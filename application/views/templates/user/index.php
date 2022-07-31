@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="main-wrapper container">
       <div class="navbar-bg bg-danger"></div>
       <nav class="navbar navbar-expand-lg main-navbar pt-5">
-        <!-- <img src="<?=base_url('public/')?>img/logoAlt.png" class="image rounded mr-5" width="200"> -->
+        <img src="<?=base_url('public/')?>img/logoAlt.png" class="image rounded mr-5" width="200">
         <div class="nav-collapse">
           <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
             <i class="fas fa-ellipsis-v"></i>
@@ -35,23 +35,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <ul class="navbar-nav">
             <li class="nav-item active"><a href="<?= base_url(); ?>" class="nav-link">Beranda</a></li>
             <li class="nav-item"><a href="<?= base_url('lowongan'); ?>" class="nav-link">Lowongan</a></li>
-            <li class="nav-item"><a href="<?= base_url('status-lamaran'); ?>" class="nav-link">Status Lamaran</a></li>
+            <li class="nav-item <?= ($this->session->userdata('logged_in') ? 'd-none' : ''); ?>"><a href="<?= base_url('register'); ?>" class="nav-link">Daftar Akun</a></li>
+            <li class="nav-item <?= ($this->session->userdata('logged_in') ? '' : 'd-none'); ?>"><a href="<?= base_url('status-lamaran'); ?>" class="nav-link">Status Lamaran</a></li>
           </ul>
         </div>
         <ul class="navbar-nav ml-auto">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <img alt="image" src="<?php echo base_url(); ?>assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block">Hello, Aziz</div></a>
+            <div class="d-sm-none <?= ($this->session->userdata('logged_in') ? 'd-lg-inline-block' : 'd-none'); ?>">Hello, <?= $this->session->userdata('username'); ?></div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-title">Logged in 5 min ago</div>
-              <a href="<?php echo base_url(); ?>dist/features_profile" class="dropdown-item has-icon">
+              <a href="<?php echo base_url(); ?>dist/features_profile" class="dropdown-item has-icon <?= ($this->session->userdata('logged_in') ? '' : 'd-none'); ?>">
                 <i class="far fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item has-icon text-danger">
+              <a class="dropdown-item has-icon text-danger <?= ($this->session->userdata('logged_in') ? '' : 'd-none'); ?>" 
+                data-confirm="Logout?|Apakah anda yakin ingin logout?" data-confirm-yes="window.location.href =`<?php echo base_url('logout')?>`">
                 <i class="fas fa-sign-out-alt"></i> Logout
               </a>
-              <a href="<?php echo base_url('login'); ?>" class="dropdown-item has-icon text-primary">
+              <a href="<?php echo base_url('login'); ?>" class="dropdown-item has-icon text-primary <?= ($this->session->userdata('logged_in') ? 'd-none' : ''); ?>">
                 <i class="fas fa-sign-in-alt"></i> Login
               </a>
             </div>
