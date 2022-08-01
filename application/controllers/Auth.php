@@ -94,7 +94,6 @@ class Auth extends CI_Controller {
 
     $username = $this->input->post('user');
     $password = $this->input->post('pass');
-    // $password = md5($password);
 
     $user = $this->model_auth->login($username, $password);
     if(!empty($user)){
@@ -104,11 +103,10 @@ class Auth extends CI_Controller {
           'role'      => $user->role,
           'logged_in' => TRUE
       );
-      $this->session->seuserdata($session_data);
+      $this->session->set_userdata($session_data);
       echo "success";
     } else{
       echo "error";
-      
     }
   }
 

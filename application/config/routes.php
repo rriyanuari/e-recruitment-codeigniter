@@ -24,8 +24,6 @@ $route['default_controller'] = 'user/index';
 
 // Admin
   $route['admin/dashboard'] = 'admin';
-  $route['admin/papan-jadwal'] = 'admin/papan_jadwal';
-  $route['admin/papan-jadwal/(:any)'] = 'admin/papan_jadwal_tanggal/$1';
 
     // MASTER DATA
       $route['admin/user'] = 'admin/master_user';
