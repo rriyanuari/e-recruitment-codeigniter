@@ -12,7 +12,7 @@
                 <p>
                   Silahkan lengkapi form untuk masuk ke akun anda 
                 </p>
-                <form method="POST" action="#" class="needs-validation" novalidate="">
+                <div class="needs-validation" novalidate="">
                   <div class="form-group">
                     <label for="usename">Username</label>
                     <input id="usename" type="text" class="form-control" name="username" tabindex="1" required autofocus>
@@ -36,7 +36,7 @@
                       Login
                     </button>
                   </div>
-                </form>
+                </div>
 
               </div>
             </div>

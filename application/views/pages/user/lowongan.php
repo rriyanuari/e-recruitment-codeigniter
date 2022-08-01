@@ -21,7 +21,7 @@
               </p>
             </div>
             <div class="card-footer d-flex justify-content-end align-items-center">
-              <a href="<?= $base_url(''); ?>">
+              <a href="<?= base_url('lamar-lowongan/'.$lowongan['id']); ?>">
                 <button type="button" class="btn ml-3 btn-success">Lamar</button>
               </a> 
             </div>

@@ -88,7 +88,7 @@ class Admin extends CI_Controller {
       }
     }
 
-    public function ediuser($id)
+    public function edit_user($id)
     {
       $this->load->model(['Model_user']);
 
@@ -102,7 +102,7 @@ class Admin extends CI_Controller {
       $this->load->view('function/admin/user.php');
     }
 
-    public function proses_ediuser()
+    public function proses_edit_user()
     {
       $this->load->model(['Model_user']);
 

@@ -18,6 +18,8 @@ $route['default_controller'] = 'user/index';
 // User
   $route['home'] = 'user/index';
   $route['lowongan'] = 'user/lowongan';
+    $route['lamar-lowongan/(:any)'] = 'user/lamar_lowongan/$1';
+
   $route['status-lamaran'] = 'user/status_lamaran';
 
 // ----------
