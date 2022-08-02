@@ -24,6 +24,8 @@ $route['default_controller'] = 'user/index';
     $route['lamar-lowongan/(:any)'] = 'user/lamar_lowongan/$1';
 
   $route['status-lamaran'] = 'user/status_lamaran';
+  
+  $route['lihat-cv/(:any)'] = 'user/lihat_cv/$1';
 
 // ----------
 

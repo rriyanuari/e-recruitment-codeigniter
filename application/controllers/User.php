@@ -113,6 +113,15 @@ class User extends CI_Controller {
 
 	}
 
+	public function lihat_cv($nama_file)
+	{
+		$data = [
+			'nama_file' 		=> $nama_file,
+		];
+		$this->load->view('pages/user/lihat_cv.php', $data);
+
+	}
+
 
 }
 

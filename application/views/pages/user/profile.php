@@ -47,7 +47,17 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="upload_cv">Upload CV</label>
+                  <label>CV terupload</label>
+                  <div class="d-flex align-items-center">
+                    <div class="mr-3"><?= $pelamar['cv'] ?></div>
+                    <a href="lihat-cv/<?= $pelamar['cv'] ?>" class="btn btn-sm has-icon bg-primary text-white">
+                      <i class="fas fa-eye"></i> Lihat CV
+                    </a>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="upload_cv">Upload CV Baru</label>
                   <input type="file" class="form-control-file" id="upload_cv" value="<?= $pelamar['cv'] ?>">          
                 </div>
 
