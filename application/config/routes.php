@@ -17,6 +17,9 @@ $route['default_controller'] = 'user/index';
 
 // User
   $route['home'] = 'user/index';
+
+  $route['profil'] = 'user/profil';
+  
   $route['lowongan'] = 'user/lowongan';
     $route['lamar-lowongan/(:any)'] = 'user/lamar_lowongan/$1';
 

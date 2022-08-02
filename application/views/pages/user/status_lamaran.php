@@ -26,11 +26,36 @@
             <?php
               $no = 1;
               foreach($lamarans as $lamaran):
+                switch ($lamaran['status_lamaran']) {
+                  case 'Tes':
+                    $status_lamaran = 'Menunggu pengerjaan Tes';
+                    break;
+
+                  case 'Proses':
+                    $status_lamaran = 'Lamaran sedang di proses';
+                    break;
+
+                  case 'Interview':
+                    $status_lamaran = 'Lamaran sedang di proses';
+                    break;
+
+                  case 'Lulus':
+                    $status_lamaran = 'Lamaran sedang di proses';
+                    break;
+                  
+                  case 'Tidak Lulus':
+                    $status_lamaran = 'Lamaran sedang di proses';
+                    break;
+                  
+                  default:
+                    # code...
+                    break;
+                }
               ?>
               <tr>
                 <td class="text-center"><?= $no++; ?></td>
                 <td><?= $lamaran['judul']; ?></td>
-                <td><?= $lamaran['status_lamaran']; ?></td>
+                <td class="text-center"><?= $status_lamaran; ?></td>
                 <td class="text-center">
                   <?= ($lamaran['nilai_tes']) ? $lamaran['nilai_tes'] : '-' ?>
                 </td>

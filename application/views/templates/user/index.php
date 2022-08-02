@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="main-wrapper container">
       <div class="navbar-bg bg-danger"></div>
       <nav class="navbar navbar-expand-lg main-navbar pt-5">
-        <img src="<?=base_url('public/')?>img/logoAlt.png" class="image rounded mr-5" width="200">
+        <!-- <img src="<?=base_url('public/')?>img/logoAlt.png" class="image rounded mr-5" width="200"> -->
         <div class="nav-collapse">
           <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
             <i class="fas fa-ellipsis-v"></i>
@@ -44,7 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <img alt="image" src="<?php echo base_url(); ?>assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
             <div class="d-sm-none <?= ($this->session->userdata('logged_in') ? 'd-lg-inline-block' : 'd-none'); ?>">Hello, <?= $this->session->userdata('username'); ?></div></a>
             <div class="dropdown-menu dropdown-menu-right">
-              <a href="<?php echo base_url(); ?>dist/features_profile" class="dropdown-item has-icon <?= ($this->session->userdata('logged_in') ? '' : 'd-none'); ?>">
+              <a href="<?php echo base_url('profil'); ?>" class="dropdown-item has-icon <?= ($this->session->userdata('logged_in') ? '' : 'd-none'); ?>">
                 <i class="far fa-user"></i> Profile
               </a>
               <div class="dropdown-divider"></div>

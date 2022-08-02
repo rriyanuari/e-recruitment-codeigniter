@@ -4,14 +4,14 @@
 
       public function semua(){
           $query = $this->db  ->select('*')
-                              ->get('t_pelanggan');
+                              ->get('pelamar');
           return $query;
       }
 
-      public function by_id($id){
+      public function by($collumn, $id){
         $query = $this->db  ->select('*')
-                            ->where('id_pelanggan', $id)
-                            ->get('t_pelanggan');
+                            ->where($collumn, $id)
+                            ->get('pelamar');
         return $query;
       }
 

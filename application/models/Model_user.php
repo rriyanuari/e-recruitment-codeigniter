@@ -8,10 +8,12 @@
             return $query;
         }
 
-        public function by_username($username){
+        public function by($id_user){
             $query = $this->db  ->select('*')
-                                ->where('username', $username)
-                                ->get('t_user');
+                                ->from('t_user a')
+                                ->join('pelamar b', 'a.id_user = b.id_user', 'left')
+                                ->where('a.id_user', $id_user);
+            $query = $this->db->get(); 
             return $query;
         }
     

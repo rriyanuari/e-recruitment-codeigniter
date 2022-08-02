@@ -21,6 +21,21 @@ class User extends CI_Controller {
 		$this->load->view('templates/user/index.php', $data);
 	}
 
+	public function profil()
+	{
+		$this->load->model(['Model_user']);
+		$id_user  = $this->session->userdata('id');
+
+		$pelamar_data	=	$this->Model_user->by($id_user)->row_array();
+
+		$data = [
+			'title' 		=> 'Akun',
+			'page' 			=> 'profile',
+			'pelamar'		=> $pelamar_data		
+		];
+		$this->load->view('templates/user/index.php', $data);
+	}
+
 	public function lowongan()
 	{
 		$this->load->model(['Model_lowongan']);
@@ -44,25 +59,27 @@ class User extends CI_Controller {
 				alert('Silahkan login untuk melamar lowongan')
 				window.location.href =`<?php echo base_url('login')?>`;
 			</script><?php
-			break;
+			return null;
     }
 
 		$this->load->model(['Model_lamaran']);
+		$this->load->model(['Model_pelamar']);
 
-		$id_pelamar  = $this->session->userdata('logged_in');
+		$id_user  = $this->session->userdata('id');
+		$pelamar = $this->Model_pelamar->by('id_user', $id_user)->row_array();
 
-		$check = $this->Model_lamaran->check_by($id_pelamar, $id_lowongan);
+		$check = $this->Model_lamaran->check_by($pelamar['id'], $id_lowongan);
 
 		if($check->num_rows() != 0){
 			?><script>
 				alert('Lowongan sudah dilamar, tidak dapat melamar lowongan yang sama')
 				window.location.href =`<?php echo base_url('status-lamaran')?>`;
 			</script><?php
-			break;
+			return null;
 		}
 
 		$data = [
-			'id_pelamar' 				=> $id_pelamar,
+			'id_pelamar' 				=> $pelamar['id'],
 			'id_lowongan' 			=> $id_lowongan,
 			'status_lamaran' 		=> 'Tes',
 			'tgl_lamaran' 			=> Date('Y-m-d H:i:s')					
@@ -80,18 +97,19 @@ class User extends CI_Controller {
 	public function status_lamaran()
 	{
 		$this->load->model(['Model_lamaran']);
+		$this->load->model(['Model_pelamar']);
 
-		$id_pelamar  = $this->session->userdata('logged_in');
+		$id_user  = $this->session->userdata('id');
+		$pelamar = $this->Model_pelamar->by('id_user', $id_user)->row_array();
 
-		$lamaran_data	=	$this->Model_lamaran->by('id_pelamar', $id_pelamar)->result_array();
+		$lamaran_data	=	$this->Model_lamaran->by('id_pelamar', $pelamar['id'])->result_array();
 		$data = [
 			'title' 		=> 'Status Lamaran',
 			'page' 			=> 'status_lamaran',
 			'lamarans' 	=> $lamaran_data					
 		];
 
-
-		$this->load->view('templates/user/index.php', $data);
+			$this->load->view('templates/user/index.php', $data);
 
 	}
 
