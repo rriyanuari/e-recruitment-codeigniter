@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="main-wrapper container">
       <div class="navbar-bg bg-danger"></div>
       <nav class="navbar navbar-expand-lg main-navbar pt-5">
-        <!-- <img src="<?=base_url('public/')?>img/logoAlt.png" class="image rounded mr-5" width="200"> -->
+        <img src="<?=base_url('public/')?>img/logoAlt.png" class="image rounded mr-5" width="200">
         <div class="nav-collapse">
           <a class="sidebar-gone-show nav-collapse-toggle nav-link" href="#">
             <i class="fas fa-ellipsis-v"></i>
@@ -69,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
       <footer class="main-footer">
           <div class="container">
-            Copyright &copy; 2022 <div class="bullet"></div> Design By Stisla
+            Copyright &copy; 2022
           </div> 
       </footer>
     </div>

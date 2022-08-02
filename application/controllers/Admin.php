@@ -129,6 +129,7 @@ class Admin extends CI_Controller {
       }
     }
 
+  // LOWONGAN
     public function lowongan_master()
     {
       $this->load->model(['Model_lowongan']);
@@ -232,6 +233,39 @@ class Admin extends CI_Controller {
         echo "error";
       }
     }
+  // END LOWONGAN ======
+
+  // SOAL
+    public function soal_master()
+    {
+      $this->load->model(['Model_soal']);
+
+      $data_soal	=	$this->Model_soal->semua()->result_array();
+      $data = [
+        'title' 		=> 'Data soal',
+        'page' 			=> 'soal_master',
+        'soals'			=> $data_soal			
+      ];
+      $this->load->view('templates/admin/index.php', $data);
+      // $this->load->view('function/admin/soal.php');
+    }  
+  // END SOAL ======
+
+  // PELAMAR
+    public function pelamar_master()
+    {
+      $this->load->model(['Model_lamaran']);
+
+      $data_lamaran	=	$this->Model_lamaran->join_pelamar_lowongan()->result_array();
+      $data = [
+        'title' 		=> 'Data Pelamar',
+        'page' 			=> 'pelamar_master',
+        'lamarans'			=> $data_lamaran			
+      ];
+      $this->load->view('templates/admin/index.php', $data);
+      // $this->load->view('function/admin/lamaran.php');
+    }  
+  // END PELAMAR ======
 
     public function laporan()
     {

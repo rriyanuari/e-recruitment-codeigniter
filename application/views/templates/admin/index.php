@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <!-- <img src="<?=base_url('public/')?>img/logoAlt.png" class="image" width="200"> -->
+            <img src="<?=base_url('public/')?>img/logoAlt.png" class="image" width="200">
             <!-- <a href="<?php echo base_url(); ?>dist/index">Stisla</a> -->
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
@@ -67,13 +67,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
             <li class="menu-header">Master Data</li>
             <li class="<?php echo $this->uri->segment(2) == 'lowongan' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>admin/lowongan"><i class="fas fa-briefcase"></i> <span>Lowongan</span></a></li>
-            <li class="<?php echo $this->uri->segment(2) == 'soal' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>soal"><i class="fas fa-question-circle"></i> <span>Soal Tes</span></a></li>
+            <li class="<?php echo $this->uri->segment(2) == 'soal' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>admin/soal"><i class="fas fa-question-circle"></i> <span>Soal Tes</span></a></li>
 
             <li class="menu-header">Perekrutan</li>
-            <li class="<?php echo $this->uri->segment(2) == 'pelamar' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>pelamar"><i class="fas fa-users"></i> <span>Pelamar</span></a></li>
+            <li class="<?php echo $this->uri->segment(2) == 'pelamar' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>admin/pelamar"><i class="fas fa-users"></i> <span>Pelamar</span></a></li>
 
             <li class="menu-header">Laporan</li>
-            <li class="<?php echo $this->uri->segment(2) == 'laporan' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>laporan"><i class="fas fa-clipboard-list"></i> <span>Laporan</span></a></li>
+            <li class="<?php echo $this->uri->segment(2) == 'laporan' ? 'active' : ''; ?>"><a class="nav-link" href="<?php echo base_url(); ?>admin/laporan"><i class="fas fa-clipboard-list"></i> <span>Laporan</span></a></li>
 
           </ul>
 
@@ -95,7 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; 2022 <div class="bullet"></div> Design By Stisla
+          Copyright &copy; 2022
         </div>
         <div class="footer-right">
           

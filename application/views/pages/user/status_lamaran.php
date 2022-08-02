@@ -30,21 +30,17 @@
                   case 'Tes':
                     $status_lamaran = 'Menunggu pengerjaan Tes';
                     break;
-
+  
                   case 'Proses':
                     $status_lamaran = 'Lamaran sedang di proses';
                     break;
-
-                  case 'Interview':
-                    $status_lamaran = 'Lamaran sedang di proses';
-                    break;
-
+  
                   case 'Lulus':
-                    $status_lamaran = 'Lamaran sedang di proses';
+                    $status_lamaran = 'Selamat anda lulus, akan dilanjut ke proses interview';
                     break;
                   
                   case 'Tidak Lulus':
-                    $status_lamaran = 'Lamaran sedang di proses';
+                    $status_lamaran = 'Tidak Lulus';
                     break;
                   
                   default:
@@ -60,7 +56,7 @@
                   <?= ($lamaran['nilai_tes']) ? $lamaran['nilai_tes'] : '-' ?>
                 </td>
                 <td class="text-center">
-                  <?= ($lamaran['tgl_tes']) ? $lamaran['tgl_tes'] : '-' ?>  
+                  <?= ($lamaran['tgl_tes']) ? date( 'd-m-Y', strtotime($lamaran['tgl_tes'])) : '-' ?>  
                 </td>
                 <td class="project-actions text-center">
                   <button class="btn btn-sm btn-icon btn-danger" id="<?= $lamaran['id'] ?>">

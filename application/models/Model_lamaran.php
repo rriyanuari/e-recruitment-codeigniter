@@ -17,6 +17,15 @@
         return $query;
       }
 
+      public function join_pelamar_lowongan(){
+        $query = $this->db  ->select('*')
+                            ->from('lamaran a')
+                            ->join('lowongan b', 'a.id_lowongan=b.id', 'left')
+                            ->join('pelamar c', 'a.id_pelamar=c.id', 'left');
+        $query = $this->db->get(); 
+        return $query;
+      }
+
       public function check_by($id_pelamar, $id_lowongan){
         $query = $this->db  ->select('*')
                             ->where('id_pelamar', $id_pelamar)

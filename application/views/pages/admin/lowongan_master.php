@@ -18,7 +18,7 @@
               <th width="" class="text-center">No</th>
 							<th width="" class="text-center">Judul</th>
 							<th width="" class="text-center">Deskripsi</th>
-							<th width="" class="text-center">Tgl Dibuat</th>
+							<th width="15%" class="text-center">Tgl Dibuat</th>
 							<th width="" class="text-center">Status</th>
               <th width="15%" class="text-center">Action</th>
             </tr>
@@ -32,7 +32,7 @@
               <td class="text-center"><?= $no++; ?></td>
 							<td><?= $lowongan['judul']; ?></td>
 							<td><?= $lowongan['deskripsi']; ?></td>
-              <td class="text-center"><?= $lowongan['tgl_dibuat']; ?></td>
+              <td class="text-right"><?= date( 'd-m-Y', strtotime($lowongan['tgl_dibuat'])); ?></td>
               <td class="text-center"><?= ($lowongan['status_aktif'] == 0) ? "-" : "Aktif" ; ?></td>
               <td class="project-actions text-center">
                 <a class="btn btn-sm btn-icon btn-primary" href="<?=base_url('admin/lowongan-edit/').$lowongan['id']?>">

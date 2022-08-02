@@ -47,6 +47,10 @@ $route['default_controller'] = 'user/index';
         $route['admin/lowongan-edit/(:any)'] = 'admin/lowongan_edit/$1';
         $route['admin/lowongan-proses-edit'] = 'admin/lowongan_proses_edit';
 
+      $route['admin/soal'] = 'admin/soal_master';
+
+      $route['admin/pelamar'] = 'admin/pelamar_master';
+
       $route['admin/laporan'] = 'admin/laporan';
         $route['admin/laporan-print'] = 'admin/laporan_print';
 // -------------
