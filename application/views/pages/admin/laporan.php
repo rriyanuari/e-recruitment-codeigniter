@@ -1,37 +1,34 @@
 <!-- Data Table -->
 <div class="row">
   <div class="col-12">
-    <div class="card card-success">
+    <div class="card card-maroon">
       <div class="card-header">
         <h3 class="card-title"></h3>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
-        <table class="table table-hover datatable">
+        <table class="table table-bordered table-hover">
           <div class="d-flex">
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>Tanggal awal:</label>
               <input type="date" class="form-control" id="tgl_awal" value="<?=$tgl_awal?>">
-              <br>
+            </div>
+            <div class="col-md-4">
               <label>Tanggal akhir:</label>
               <input type="date" class="form-control" id="tgl_akhir" value="<?=$tgl_akhir?>">
             </div>
 
             <!-- BUTTON -->
-            <div class="col-md-6">
-              <br>              
+            <div class="col-md-2">
               <br>
-              <br>
-              <br>
-              <br>
-              <a><button type="button" class="btn btn-outline-success m-2 mb-3 px-3" id="tmb_cari">Cari</i></button></a>
+              <a><button type="button" class="btn btn-outline-danger m-2 mb-3 px-3" id="tmb_cari_lamaran">Cari</i></button></a>
             </div>
             <div class="col-md-2 text-right">
               <br>
               <?php
-                if($pemesanans->num_rows() > 0){
+                if($lamarans->num_rows() > 0){
               ?>
-              <a href="<?php echo base_url()."admin/laporan_print?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir;?>"><button class="btn btn-small btn-success-primary m-2 mb-3 "><i class="fas fa-print"></i></button></a>
+              <a href="<?php echo base_url()."admin/print_lamaran?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir;?>"><button class="btn btn-small btn-outline-danger m-2 mb-3 "><i class="fas fa-print"></i></button></a>
               <?php
                 }
               ?>
@@ -40,61 +37,63 @@
 
           <br>
 
-          <!-- <div class="d-flex mb-4">
-            <div class="ml-auto">
-            </div>
-          </div> -->
-
           <thead>
-            <tr>
-              <th>No</th>
-							<th>Pelanggan</th>
-							<th>Lapangan</th>
-							<th>Tanggal</th>
-							<th>Jam</th>
-							<th>Harga</th>
+            <tr class="text-center">
+              <th width="" class="text-center">No</th>
+							<th width="" class="text-center">Nama</th>
+							<th width="" class="text-center">Pendidikan</th>
+							<th width="" class="text-center">Yang Dilamar</th>
+							<th width="20%" class="text-center">Status</th>
+							<th width="" class="text-center">Nilai Tes</th>
+							<th width="15%" class="text-center">Tgl Lamaran</th>
             </tr>
           </thead>
           <tbody>
-            <?php
-              $no = 1;
-              if($pemesanans->num_rows() > 0){
-                $total_penyewaan = 0;
-                foreach($pemesanans->result_array() as $pemesanan):
-                  $jam = strtotime( $pemesanan['tanggal_jam'] );
-                  $jam = date('H:i', $jam);
-                  $tanggal = date('d-m-Y', strtotime( $pemesanan['tanggal_jam']));
-                  // $tanggal = date('H:i', $jam);
+          <?php
+            $no = 1;
+            if($lamarans->num_rows() > 0){
+              foreach($lamarans->result_array() as $lamaran):
+                switch ($lamaran['status_lamaran']) {
+                  case 'Tes':
+                    $status_lamaran = 'Menunggu pengerjaan Tes';
+                    break;
   
-                  $jam2 = new DateTime($jam);
-                  $jam2->add(new DateInterval('PT'.$pemesanan['durasi'].'H'));
-
-                  $total_penyewaan += $pemesanan['harga'] 
-              ?>
-              <tr>
-                <td width="10%" class="text-center align-middle"><?= $no++; ?></td>
-                <td width="20%" class="align-middle"><?= $pemesanan['pelanggan']; ?></td>
-                <td width="20%" class="align-middle"><?= $pemesanan['lapangan']; ?></td>
-                <td width="15%" class="align-middle"><?= $tanggal; ?></td>
-                <td width="15%" class="align-middle"><?= $jam." - ".$jam2->format('H:i'); ?></td>
-                <td width="10%" class="align-middle"> <?= "Rp. ".number_format($pemesanan['harga'],0,',','.')?></td>
-              </tr>
-            <?php 
-                endforeach;
-            ?>
-            <tr style="font-weight: bold;">
-              <td colspan="5" class="text-center">Total Penyewaan</td>
-              <td>Rp. <?=number_format($total_penyewaan,0,',','.');?></td>
+                  case 'Proses':
+                    $status_lamaran = 'Lamaran sedang di proses';
+                    break;
+  
+                  case 'Lulus':
+                    $status_lamaran = 'Selamat anda lulus, akan dilanjut ke proses interview';
+                    break;
+                  
+                  case 'Tidak Lulus':
+                    $status_lamaran = 'Tidak Lulus';
+                    break;
+                  
+                  default:
+                    # code...
+                    break;
+                }
+          ?>
+            <tr>
+              <td class="text-center"><?= $no++; ?></td>
+							<td><?= $lamaran['nama_lengkap']; ?></td>
+              <td><?= $lamaran['jenjang_pendidikan']; ?></td>
+              <td><?= $lamaran['judul']; ?></td>
+              <td><?= $status_lamaran; ?></td>
+              <td><?= $lamaran['nilai_tes']; ?></td>
+              <td class="text-right"><?= date( 'd-m-Y', strtotime($lamaran['tgl_dibuat'])); ?></td>
             </tr>
-            <?php
-              }else{
-              ?>
-              <tr>
-                <td colspan="6" class="text-center">Silahkan Pilih Periode Tanggal</td>
-              </tr>
-            <?php
-              }
-            ?>
+          <?php 
+            endforeach;
+            }else{
+          ?>
+            <tr>
+              <td colspan="6" class="text-center">Silahkan Pilih Periode Tanggal</td>
+            </tr>
+          <?php
+            }
+          ?>
           </tbody>
         </table>
       </div>

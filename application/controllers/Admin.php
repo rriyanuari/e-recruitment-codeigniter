@@ -269,7 +269,7 @@ class Admin extends CI_Controller {
 
     public function laporan()
     {
-      $this->load->model(['Model_pemesanan']);
+      $this->load->model(['Model_lamaran']);
       $tanggal1 = "";
       $tanggal2 = "";
       $tanggal3 = "";
@@ -282,14 +282,14 @@ class Admin extends CI_Controller {
         $tanggal3 = $tanggal3->modify('+1 day');
         $tanggal3 = $tanggal3->format('Y-m-d');
       }
-      $pemesanan_data	=	$this->Model_pemesanan->where_success_by_tanggal_join_pelanggan($tanggal1, $tanggal3);
+      $data_lamaran	=	$this->Model_lamaran->join_pelamar_lowongan();
   
       $data = [
         'title' 				=> 'Laporan ',
         'page' 					=> 'laporan',
         'tgl_awal' 			=> $tanggal1,
         'tgl_akhir' 		=> $tanggal2,
-        'pemesanans'	  => $pemesanan_data
+        'lamarans'	  => $data_lamaran
       ];
       $this->load->view('templates/admin/index.php', $data);
       $this->load->view('function/admin/laporan.php');
@@ -297,23 +297,24 @@ class Admin extends CI_Controller {
 
     public function laporan_print()
     {
-      $this->load->model(['Model_pemesanan']);
+      $this->load->model(['Model_lamaran']);
       $tanggal1 = $this->input->get('tgl_awal');
       $tanggal2 = $this->input->get('tgl_akhir');
 
       $tanggal3 = new DateTime($tanggal2);
       $tanggal3 = $tanggal3->modify('+1 day');
       $tanggal3 = $tanggal3->format('Y-m-d');
-      $pemesanan_data	=	$this->Model_pemesanan->where_success_by_tanggal_join_pelanggan($tanggal1, $tanggal3);
+      $data_lamaran	=	$this->Model_lamaran->join_pelamar_lowongan();
 
       
       $data = [
+        'title' 				=> 'Laporan Pelamar',
         'tgl_awal' 			=> $tanggal1,
         'tgl_akhir' 		=> $tanggal2,
-        'pemesanans'	  => $pemesanan_data,
+        'lamarans'	  => $data_lamaran,
         'username'	    => $this->session->userdata('username')
       ];
-      $this->load->view('pages/admin/laporan_print.php', $data);
+      $this->load->view('pages/admin/print_laporan.php', $data);
     }
 
 
