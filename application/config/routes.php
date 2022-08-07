@@ -48,8 +48,15 @@ $route['default_controller'] = 'user/index';
         $route['admin/lowongan-proses-edit'] = 'admin/lowongan_proses_edit';
 
       $route['admin/soal'] = 'admin/soal_master';
+        $route['admin/soal-tambah'] = 'admin/soal_tambah';
+        $route['admin/soal-proses-tambah'] = 'admin/soal_proses_tambah';
+        $route['admin/soal-proses-hapus'] = 'admin/soal_proses_hapus';
+        $route['admin/soal-edit/(:any)'] = 'admin/soal_edit/$1';
+        $route['admin/soal-proses-edit'] = 'admin/soal_proses_edit';
 
       $route['admin/pelamar'] = 'admin/pelamar_master';
+        $route['admin/pelamar-proses-lulus'] = 'admin/pelamar_proses_lulus';
+        $route['admin/pelamar-proses-gagal'] = 'admin/pelamar_proses_gagal';
 
       $route['admin/laporan'] = 'admin/laporan';
         $route['admin/laporan-print'] = 'admin/laporan_print';

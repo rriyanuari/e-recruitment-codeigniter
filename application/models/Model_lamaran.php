@@ -44,9 +44,9 @@
         return $query;
       }
 
-      public function update_by_id($where,$data,$table){
+      public function update_by_id($where, $data, $table){
         $query =    $this->db->where($where)
-                            ->update($table,$data);
+                            ->update($table, $data);
         return $query;
       }	
     }

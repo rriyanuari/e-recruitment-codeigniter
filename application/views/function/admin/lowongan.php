@@ -43,7 +43,7 @@
       }
     });
 
-    $('.tmb_hapus ').on('click',function(){
+    $('.tmb_hapus').on('click',function(){
       event.preventDefault();
 
       var id = this.id;

@@ -59,9 +59,10 @@
               </td>
               <td class="text-right"><?= date( 'd-m-Y', strtotime($lamaran['tgl_dibuat'])); ?></td>
               <td class="project-actions text-center">
-                <button class="btn btn-sm btn-icon btn-success tmb_hapus mr-2" id="<?= $lamaran['id'] ?>">
+                <button class="btn btn-sm btn-icon btn-success tmb_lulus mr-2 
+                  <?= ($lamaran['status_lamaran'] == 'Tidak Lulus' || $lamaran['status_lamaran'] == 'Lulus' || $lamaran['status_lamaran'] == 'Tes') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>">
                   <i class="fas fa-check-circle"></i>
-                </button><button class="btn btn-sm btn-icon btn-danger tmb_hapus" id="<?= $lamaran['id'] ?>">
+                </button><button class="btn btn-sm btn-icon btn-danger tmb_gagal <?= ($lamaran['status_lamaran'] == 'Tidak Lulus' || $lamaran['status_lamaran'] == 'Lulus') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>">
                   <i class="fas fa-times-circle"></i>
                 </button>
               </td>

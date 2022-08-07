@@ -128,6 +128,7 @@ class Admin extends CI_Controller {
         
       }
     }
+  // ENDMASTER ----------------------
 
   // LOWONGAN
     public function lowongan_master()
@@ -247,8 +248,109 @@ class Admin extends CI_Controller {
         'soals'			=> $data_soal			
       ];
       $this->load->view('templates/admin/index.php', $data);
-      // $this->load->view('function/admin/soal.php');
-    }  
+      $this->load->view('function/admin/soal.php');
+    }
+    
+    public function soal_tambah()
+    {
+      $data = [
+        'title' 		=> 'Tambah soal',
+        'page' 			=> 'soal_tambah',
+      ];
+      $this->load->view('templates/admin/index.php', $data);
+      $this->load->view('function/admin/soal.php');
+    }
+
+    public function soal_proses_tambah()
+    {
+      $this->load->model(['Model_soal']);
+
+      $nomor        = $this->input->post('nomor');
+      $soal   = $this->input->post('pertanyaan');
+      $a            = $this->input->post('a');
+      $b            = $this->input->post('b');
+      $c            = $this->input->post('c');
+      $jawaban      = $this->input->post('jawaban');
+
+
+      $data = array(
+        'nomor'       => $nomor,
+        'soal'        => $soal,
+        'a'           => $a,
+        'b'           => $b,
+        'c'           => $c,
+        'jawaban'     => $jawaban,
+      );
+
+      $insert = $this->Model_soal->tambah($data,'soal');
+      
+      if($insert){
+        echo "success";
+      } else{
+        echo "error";
+      }    
+    }
+
+    public function soal_edit($id)
+    {
+      $this->load->model(['Model_soal']);
+      
+      $data_soal	=	$this->Model_soal->by_id($id)->row_array();
+      $data = [
+        'title' 		=> 'Edit soal',
+        'page' 			=> 'soal_edit',
+        'soal'      => $data_soal,	
+      ];
+      $this->load->view('templates/admin/index.php', $data);
+      $this->load->view('function/admin/soal.php');
+    }
+
+    public function soal_proses_edit()
+    {
+      $this->load->model(['Model_soal']);
+
+      $id = $this->input->post('id');
+  
+      $nomor        = $this->input->post('nomor');
+      $soal         = $this->input->post('pertanyaan');
+      $a            = $this->input->post('a');
+      $b            = $this->input->post('b');
+      $c            = $this->input->post('c');
+      $jawaban      = $this->input->post('jawaban');
+
+      $data = array(
+        'nomor'       => $nomor,
+        'soal'        => $soal,
+        'a'           => $a,
+        'b'           => $b,
+        'c'           => $c,
+        'jawaban'     => $jawaban,
+      );
+
+      $where = array(
+        'id' => $id
+      );
+
+      if($this->Model_soal->update_by_id($where,$data,'soal')){
+        echo "success";
+      } else{
+        echo "error";
+      }
+    }
+
+    public function soal_proses_hapus()
+    {
+      $this->load->model(['Model_soal']);
+  
+      $id = $this->input->post('id');
+  
+      if($this->Model_soal->hapus_by_id($id)){
+        echo "success";
+      } else{
+        echo "error";
+        
+      }
+    }
   // END SOAL ======
 
   // PELAMAR
@@ -263,10 +365,51 @@ class Admin extends CI_Controller {
         'lamarans'			=> $data_lamaran			
       ];
       $this->load->view('templates/admin/index.php', $data);
-      // $this->load->view('function/admin/lamaran.php');
-    }  
+      $this->load->view('function/admin/pelamar.php');
+    }
+    
+    public function pelamar_proses_lulus()
+    {
+      $this->load->model(['Model_lamaran']);
+  
+      $data = array(
+        'status_lamaran'  => 'Lulus',
+      );
+
+      $where = array(
+        'id_pelamar' => $this->input->post('id'),
+      );
+
+      if($this->Model_lamaran->update_by_id($where, $data, 'lamaran')){
+        echo "success";
+      } else{
+        echo "error";
+        
+      }
+    }
+
+    public function pelamar_proses_gagal()
+    {
+      $this->load->model(['Model_lamaran']);
+  
+      $data = array(
+        'status_lamaran'  => 'Tidak Lulus',
+      );
+
+      $where = array(
+        'id_pelamar' => $this->input->post('id'),
+      );
+
+      if($this->Model_lamaran->update_by_id($where, $data, 'lamaran')){
+        echo "success";
+      } else{
+        echo "error";
+        
+      }
+    }
   // END PELAMAR ======
 
+  // LAPORAN ==========
     public function laporan()
     {
       $this->load->model(['Model_lamaran']);
@@ -316,6 +459,7 @@ class Admin extends CI_Controller {
       ];
       $this->load->view('pages/admin/print_laporan.php', $data);
     }
+  // END LAPORAN ==========
 
 
 
