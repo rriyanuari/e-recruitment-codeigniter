@@ -19,6 +19,7 @@ $route['default_controller'] = 'user/index';
   $route['home'] = 'user/index';
 
   $route['profil'] = 'user/profil';
+  $route['profil-proses'] = 'user/profil_proses';
   
   $route['lowongan'] = 'user/lowongan';
     $route['lamar-lowongan/(:any)'] = 'user/lamar_lowongan/$1';
@@ -61,6 +62,7 @@ $route['default_controller'] = 'user/index';
       $route['admin/laporan'] = 'admin/laporan';
         $route['admin/laporan-print'] = 'admin/laporan_print';
 // -------------
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

@@ -34,7 +34,64 @@ class User extends CI_Controller {
 			'pelamar'		=> $pelamar_data		
 		];
 		$this->load->view('templates/user/index.php', $data);
+		$this->load->view('function/register.php');
 	}
+
+	public function profil_proses()
+  {
+
+    $this->load->model(['Model_pelamar']);
+    $this->load->model(['Model_user']);
+
+    $config['upload_path']= "./public/cv";
+    $config['allowed_types'] = 'pdf';
+    $config['max_size']  = '5000';
+    $config['encrypt_name'] = TRUE;
+
+    $this->load->library('upload', $config);
+
+		$data2 = array(
+			'username'       => $this->input->post('username'),
+			'password'       => $this->input->post('password'),
+			'role'           => 1,
+		);
+		
+		$where2 = array(
+			'id_user' => $this->session->userdata('id'),
+		);
+
+		$insert2 = $this->Model_user->update_by_id($where2, $data2, 't_user');
+
+		if($insert2){
+			$data = array(
+				'nama_lengkap'        => $this->input->post('nama_lengkap'),
+				'jenis_kelamin'       => $this->input->post('jenis_kelamin'),
+				'jenjang_pendidikan'  => $this->input->post('jenjang_pendidikan'),
+				'tgl_dibuat'          => Date('Y-m-d H:i:s')
+			);
+
+			if (!$this->upload->do_upload('file')){
+				$status = "error";
+				$msg = ($this->upload->display_errors());
+			}else{
+				$dataupload         = $this->upload->data();
+				($dataupload) ? $data['cv'] = $dataupload['file_name'] : '';
+			}
+
+			$where = array(
+				'id' => $this->input->post('id'),
+			);
+		
+			$insert = $this->Model_pelamar->update_by_id($where, $data,'pelamar');
+
+			if($insert){
+				$status = "success";
+				$msg = "berhasil diupload";
+			}
+			
+		}
+    $this->output->set_content_type('application/json')->set_output(json_encode(array('status'=>$status,'msg'=>$msg)));
+  }
 
 	public function lowongan()
 	{

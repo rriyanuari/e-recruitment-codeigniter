@@ -20,9 +20,14 @@ class Admin extends CI_Controller {
   // MASTER ----------------------
     public function index()
     {
+      $this->load->model(['Model_pelamar']);
+      $this->load->model(['Model_lowongan']);
+
       $data = [
         'title' 		=> 'Dashboard',
-        'page' 			=> 'dashboard'			
+        'page' 			=> 'dashboard',
+        'pelamar'   => $this->Model_pelamar->semua()->num_rows(),
+        'lowongan'  => $this->Model_lowongan->semua()->num_rows()
       ];
       $this->load->view('templates/admin/index.php', $data);
     }
@@ -425,7 +430,8 @@ class Admin extends CI_Controller {
         $tanggal3 = $tanggal3->modify('+1 day');
         $tanggal3 = $tanggal3->format('Y-m-d');
       }
-      $data_lamaran	=	$this->Model_lamaran->join_pelamar_lowongan();
+
+      $data_lamaran	=	$this->Model_lamaran->laporan_by_tanggal($tanggal1, $tanggal3);
   
       $data = [
         'title' 				=> 'Laporan ',
@@ -447,7 +453,7 @@ class Admin extends CI_Controller {
       $tanggal3 = new DateTime($tanggal2);
       $tanggal3 = $tanggal3->modify('+1 day');
       $tanggal3 = $tanggal3->format('Y-m-d');
-      $data_lamaran	=	$this->Model_lamaran->join_pelamar_lowongan();
+      $data_lamaran	=	$this->Model_lamaran->laporan_by_tanggal($tanggal1, $tanggal3);
 
       
       $data = [
@@ -460,7 +466,5 @@ class Admin extends CI_Controller {
       $this->load->view('pages/admin/print_laporan.php', $data);
     }
   // END LAPORAN ==========
-
-
 
 }

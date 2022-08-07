@@ -62,8 +62,8 @@
                 </div>
 
                 <div class="form-group">
-                  <button type="submit" class="btn btn-danger btn-lg btn-block" id="tmb_register">
-                    Daftar
+                  <button type="submit" class="btn btn-danger btn-lg btn-block tmb_edit_pelamar" id="<?= $pelamar['id'] ?>">
+                    Ubah data profil
                   </button>
                 </div>
 

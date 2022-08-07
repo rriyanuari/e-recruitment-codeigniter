@@ -26,6 +26,17 @@
         return $query;
       }
 
+      public function laporan_by_tanggal($tanggal1, $tanggal2){
+        $query = $this->db  ->select('*')
+                            ->from('lamaran a')
+                            ->join('lowongan b', 'a.id_lowongan=b.id', 'left')
+                            ->join('pelamar c', 'a.id_pelamar=c.id', 'left')
+                            ->where('a.tgl_lamaran >=', $tanggal1)
+                            ->where('a.tgl_lamaran <=', $tanggal2);
+        $query = $this->db->get(); 
+        return $query;
+      }
+
       public function check_by($id_pelamar, $id_lowongan){
         $query = $this->db  ->select('*')
                             ->where('id_pelamar', $id_pelamar)

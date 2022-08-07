@@ -21,14 +21,14 @@
             <!-- BUTTON -->
             <div class="col-md-2">
               <br>
-              <a><button type="button" class="btn btn-outline-danger m-2 mb-3 px-3" id="tmb_cari_lamaran">Cari</i></button></a>
+              <a><button type="button" class="btn btn-outline-danger m-2 mb-3 px-3" id="tmb_cari">Cari</i></button></a>
             </div>
             <div class="col-md-2 text-right">
               <br>
               <?php
                 if($lamarans->num_rows() > 0){
               ?>
-              <a href="<?php echo base_url()."admin/print_lamaran?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir;?>"><button class="btn btn-small btn-outline-danger m-2 mb-3 "><i class="fas fa-print"></i></button></a>
+              <a href="<?php echo base_url()."admin/laporan_print?tgl_awal=".$tgl_awal."&tgl_akhir=".$tgl_akhir;?>"><button class="btn btn-small btn-outline-danger m-2 mb-3 "><i class="fas fa-print"></i></button></a>
               <?php
                 }
               ?>
@@ -89,7 +89,7 @@
             }else{
           ?>
             <tr>
-              <td colspan="6" class="text-center">Silahkan Pilih Periode Tanggal</td>
+              <td colspan="7" class="text-center">Silahkan Pilih Periode Tanggal</td>
             </tr>
           <?php
             }
