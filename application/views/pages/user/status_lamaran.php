@@ -59,8 +59,16 @@
                   <?= ($lamaran['tgl_tes']) ? date( 'd-m-Y', strtotime($lamaran['tgl_tes'])) : '-' ?>  
                 </td>
                 <td class="project-actions text-center">
-                  <button class="btn btn-sm btn-icon btn-danger" id="<?= $lamaran['id'] ?>">
-                    <i class="fas fa-times-circle"></i>
+                  <a href="<?= base_url("pengerjaan-tes") ?>">
+                    <button class="btn btn-sm btn-icon btn-primary 
+                      <?= ($lamaran['status_lamaran'] == 'Tes') ? '' : 'd-none' ?>" id="<?= $lamaran['id'] ?>"
+                      data-toggle="tooltip" data-placement="top" title="Kerjakan Tes">
+                      <i class="fas fa-clipboard-list"></i>
+                    </button>
+                  </a>
+                  <button class="btn btn-sm btn-icon btn-success 
+                    <?= ($lamaran['status_lamaran'] == 'Tes') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>">
+                    <i class="fas fa-info-circle"></i>
                   </button>
                 </td>
               </tr>

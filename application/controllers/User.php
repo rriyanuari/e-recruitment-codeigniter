@@ -150,6 +150,22 @@ class User extends CI_Controller {
 			</script><?php
 		}
 	}
+	
+	public function pengerjaan_tes()
+	{
+		$this->load->model(['Model_soal']);
+
+		$soal_data = $this->Model_soal->semua()->result_array();
+
+		$data = [
+			'title' 		=> 'Pengerjaan Tes',
+			'page' 			=> 'pengerjaan_tes',
+			'soals' 	=> $soal_data					
+		];
+
+			$this->load->view('templates/user/index.php', $data);
+
+	}
 
 	public function status_lamaran()
 	{
