@@ -160,10 +160,11 @@ class User extends CI_Controller {
 		$data = [
 			'title' 		=> 'Pengerjaan Tes',
 			'page' 			=> 'pengerjaan_tes',
-			'soals' 	=> $soal_data					
+			'soals' 		=> $soal_data					
 		];
 
 			$this->load->view('templates/user/index.php', $data);
+			$this->load->view('function/user/soal.php');
 
 	}
 

@@ -67,7 +67,8 @@
                     </button>
                   </a>
                   <button class="btn btn-sm btn-icon btn-success 
-                    <?= ($lamaran['status_lamaran'] == 'Tes') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>">
+                    <?= ($lamaran['status_lamaran'] == 'Tes') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>"
+                    data-toggle="tooltip" data-placement="top" title="Detail Lamaran">
                     <i class="fas fa-info-circle"></i>
                   </button>
                 </td>

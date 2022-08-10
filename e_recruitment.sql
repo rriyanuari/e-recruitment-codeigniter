@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 31 Jul 2022 pada 22.51
+-- Waktu pembuatan: 10 Agu 2022 pada 21.39
 -- Versi server: 10.1.38-MariaDB
 -- Versi PHP: 5.6.40
 
@@ -21,8 +21,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `e_recruitment`
 --
-CREATE DATABASE IF NOT EXISTS `e_recruitment` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `e_recruitment`;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `lamaran`
+--
+
+CREATE TABLE `lamaran` (
+  `id` int(11) NOT NULL,
+  `id_pelamar` int(11) NOT NULL,
+  `id_lowongan` int(11) NOT NULL,
+  `status_lamaran` enum('Tes','Proses','Lulus','Tidak Lulus') NOT NULL,
+  `nilai_tes` float DEFAULT NULL,
+  `tgl_tes` datetime DEFAULT NULL,
+  `tgl_lamaran` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `lamaran`
+--
+
+INSERT INTO `lamaran` (`id`, `id_pelamar`, `id_lowongan`, `status_lamaran`, `nilai_tes`, `tgl_tes`, `tgl_lamaran`) VALUES
+(2, 1, 1, 'Tes', NULL, NULL, '2022-08-01 18:27:40'),
+(3, 2, 2, 'Lulus', 100, '2022-08-01 00:00:00', '2022-08-02 17:26:16');
 
 -- --------------------------------------------------------
 
@@ -67,82 +89,36 @@ CREATE TABLE `pelamar` (
 --
 
 INSERT INTO `pelamar` (`id`, `id_user`, `nama_lengkap`, `jenis_kelamin`, `jenjang_pendidikan`, `cv`, `tgl_dibuat`) VALUES
-(1, 19, 'Riyanuari', 'Laki-Laki', 'S1', '0232545e118ba0f304ce34bcddfa7ff7.pdf', '2022-07-31 22:16:40'),
+(1, 19, 'Sandiaga', 'Laki-Laki', 'SMA/SMK', '3ec870f81b146368aa3201cd62c22b11.pdf', '2022-08-07 15:41:32'),
 (2, 20, 'Aziz', 'Laki-Laki', 'D3', 'c5bfeec5cd52b152aab4ec3eb7934867.pdf', '2022-07-31 22:19:18');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `t_lapangan`
+-- Struktur dari tabel `soal`
 --
 
-CREATE TABLE `t_lapangan` (
-  `id_lapangan` int(11) NOT NULL,
-  `lapangan` varchar(50) NOT NULL,
-  `jenis_lapangan` enum('Rumput','Matras') NOT NULL,
-  `weekday_siang` int(11) NOT NULL,
-  `weekday_malam` int(11) NOT NULL,
-  `weekend` int(11) NOT NULL
+CREATE TABLE `soal` (
+  `id` int(11) NOT NULL,
+  `nomor` int(10) NOT NULL,
+  `soal` varchar(255) NOT NULL,
+  `a` varchar(255) NOT NULL,
+  `b` varchar(255) NOT NULL,
+  `c` varchar(255) NOT NULL,
+  `jawaban` varchar(10) NOT NULL,
+  `tgl_dibuat` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `t_lapangan`
+-- Dumping data untuk tabel `soal`
 --
 
-INSERT INTO `t_lapangan` (`id_lapangan`, `lapangan`, `jenis_lapangan`, `weekday_siang`, `weekday_malam`, `weekend`) VALUES
-(1, 'Lapangan 1', 'Rumput', 75000, 100000, 120000),
-(2, 'Lapangan 2', 'Matras', 100000, 130000, 130000);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `t_pelanggan`
---
-
-CREATE TABLE `t_pelanggan` (
-  `id_pelanggan` int(11) NOT NULL,
-  `pelanggan` varchar(50) NOT NULL,
-  `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `no_hp` varchar(14) DEFAULT NULL,
-  `tgl_bergabung` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `t_pelanggan`
---
-
-INSERT INTO `t_pelanggan` (`id_pelanggan`, `pelanggan`, `jenis_kelamin`, `email`, `no_hp`, `tgl_bergabung`) VALUES
-(11, 'andy', 'Laki-Laki', 'andy_aja@gmail.com', '085155354467', '2021-07-11'),
-(12, 'subki', 'Laki-Laki', 'subjah@gmail.com', '089621234455', '2021-07-11'),
-(14, 'sandio', 'Laki-Laki', 'sandi@gmail.com', '08515535678', '2021-07-12');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `t_pemesanan`
---
-
-CREATE TABLE `t_pemesanan` (
-  `id_pemesanan` int(11) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL,
-  `lapangan` varchar(20) NOT NULL,
-  `tanggal_jam` datetime NOT NULL,
-  `durasi` int(11) NOT NULL,
-  `status` varchar(30) NOT NULL,
-  `bukti_bayar` varchar(255) NOT NULL,
-  `harga` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `t_pemesanan`
---
-
-INSERT INTO `t_pemesanan` (`id_pemesanan`, `id_pelanggan`, `lapangan`, `tanggal_jam`, `durasi`, `status`, `bukti_bayar`, `harga`) VALUES
-(3, 11, 'Lapangan 1', '2021-07-12 08:00:00', 2, 'pending', '', 240000),
-(7, 12, 'Lapangan 2', '2021-07-12 17:00:00', 1, 'success', 'bayar1.jpg', 130000),
-(8, 11, 'Lapangan 2', '2021-07-12 20:00:00', 2, 'success', 'IMG-20210531-WA0027.jpg', 260000),
-(9, 11, 'Lapangan 2', '2021-07-13 10:00:00', 1, 'success', 'bayar1.jpg', 130000);
+INSERT INTO `soal` (`id`, `nomor`, `soal`, `a`, `b`, `c`, `jawaban`, `tgl_dibuat`) VALUES
+(4, 1, 'Kapan Indonesia Merdeka?', 'Indonesia tidak pernah merdeka', '17 Agustus 1945', '2 Mei 1998', 'b', '2022-07-05'),
+(5, 2, 'Bagaimana Cara memakan bubur?', 'Diaduk searah jarum jam', 'Diaduk menyilang', 'Ditelen', 'c', '2019-07-07'),
+(6, 3, 'Kenapa dinamakan ikan?', 'Warnanya kuning', 'Karena dina lapar', 'Karena dina suka', 'b', '2019-07-07'),
+(8, 4, 'Makanan Yang biking bingung', 'Semangka', 'Pepaya', 'Apel', 'c', '2019-07-07'),
+(9, 5, 'AKLIMATISASI = …', 'adaptasi', 'depresi', 'regresi', 'a', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -163,12 +139,18 @@ CREATE TABLE `t_user` (
 
 INSERT INTO `t_user` (`id_user`, `username`, `password`, `role`) VALUES
 (1, 'admin', 'admin', 2),
-(19, 'riyanuari', '12345', 1),
+(19, 'sandiaga', '12345', 1),
 (20, 'aziz', 'aziz123', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `lamaran`
+--
+ALTER TABLE `lamaran`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `lowongan`
@@ -183,22 +165,10 @@ ALTER TABLE `pelamar`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `t_lapangan`
+-- Indeks untuk tabel `soal`
 --
-ALTER TABLE `t_lapangan`
-  ADD PRIMARY KEY (`id_lapangan`);
-
---
--- Indeks untuk tabel `t_pelanggan`
---
-ALTER TABLE `t_pelanggan`
-  ADD PRIMARY KEY (`id_pelanggan`);
-
---
--- Indeks untuk tabel `t_pemesanan`
---
-ALTER TABLE `t_pemesanan`
-  ADD PRIMARY KEY (`id_pemesanan`);
+ALTER TABLE `soal`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indeks untuk tabel `t_user`
@@ -209,6 +179,12 @@ ALTER TABLE `t_user`
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
 --
+
+--
+-- AUTO_INCREMENT untuk tabel `lamaran`
+--
+ALTER TABLE `lamaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `lowongan`
@@ -223,22 +199,10 @@ ALTER TABLE `pelamar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `t_lapangan`
+-- AUTO_INCREMENT untuk tabel `soal`
 --
-ALTER TABLE `t_lapangan`
-  MODIFY `id_lapangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `t_pelanggan`
---
-ALTER TABLE `t_pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT untuk tabel `t_pemesanan`
---
-ALTER TABLE `t_pemesanan`
-  MODIFY `id_pemesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `soal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `t_user`
