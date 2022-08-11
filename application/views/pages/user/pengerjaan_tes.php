@@ -59,7 +59,7 @@
         <?php endforeach; ?>
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn btn-lg btn-primary" id="tmb_simpan">Selesai</button>
+        <button type="submit" class="btn btn-lg btn-primary tmb_simpan" id="<?=$id_lamaran;?>">Selesai</button>
       </div>
     </div>
   </div>

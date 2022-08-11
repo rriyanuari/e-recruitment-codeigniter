@@ -15,13 +15,6 @@
         return $query;
       }
 
-      public function by_user($user){
-        $query = $this->db  ->select('*')
-                            ->where('pelanggan', $user)
-                            ->get('t_pelanggan');
-        return $query;
-      }
-
       public function semua_join_user_by_id($id){
         $this->db->select('*');
         $this->db->from('t_pelanggan a'); 

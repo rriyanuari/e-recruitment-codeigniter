@@ -59,18 +59,13 @@
                   <?= ($lamaran['tgl_tes']) ? date( 'd-m-Y', strtotime($lamaran['tgl_tes'])) : '-' ?>  
                 </td>
                 <td class="project-actions text-center">
-                  <a href="<?= base_url("pengerjaan-tes") ?>">
+                  <a href="<?= base_url("pengerjaan-tes/".$lamaran['id_lamaran']) ?>">
                     <button class="btn btn-sm btn-icon btn-primary 
-                      <?= ($lamaran['status_lamaran'] == 'Tes') ? '' : 'd-none' ?>" id="<?= $lamaran['id'] ?>"
+                      <?= ($lamaran['status_lamaran'] == 'Tes') ? '' : 'd-none' ?>" id="<?= $lamaran['id_lamaran'] ?>"
                       data-toggle="tooltip" data-placement="top" title="Kerjakan Tes">
                       <i class="fas fa-clipboard-list"></i>
                     </button>
                   </a>
-                  <button class="btn btn-sm btn-icon btn-success 
-                    <?= ($lamaran['status_lamaran'] == 'Tes') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>"
-                    data-toggle="tooltip" data-placement="top" title="Detail Lamaran">
-                    <i class="fas fa-info-circle"></i>
-                  </button>
                 </td>
               </tr>
             <?php endforeach; ?>

@@ -17,6 +17,15 @@
         return $query;
       }
 
+      public function status_lamaran_by($collumn, $id){
+        $query = $this->db  ->from('lamaran a')
+                            ->join('lowongan b', 'a.id_lowongan=b.id', 'left')
+                            ->select('a.id AS id_lamaran, status_lamaran, nilai_tes, tgl_tes, tgl_lamaran, judul, deskripsi')
+                            ->where($collumn, $id);
+        $query = $this->db->get(); 
+        return $query;
+      }
+
       public function join_pelamar_lowongan(){
         $query = $this->db  ->select('*')
                             ->from('lamaran a')

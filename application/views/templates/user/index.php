@@ -33,10 +33,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <i class="fas fa-ellipsis-v"></i>
           </a>
           <ul class="navbar-nav">
-            <li class="nav-item active"><a href="<?= base_url(); ?>" class="nav-link">Beranda</a></li>
-            <li class="nav-item"><a href="<?= base_url('lowongan'); ?>" class="nav-link">Lowongan</a></li>
-            <li class="nav-item <?= ($this->session->userdata('logged_in') ? 'd-none' : ''); ?>"><a href="<?= base_url('register'); ?>" class="nav-link">Daftar Akun</a></li>
-            <li class="nav-item <?= ($this->session->userdata('logged_in') ? '' : 'd-none'); ?>"><a href="<?= base_url('status-lamaran'); ?>" class="nav-link">Status Lamaran</a></li>
+            <li class="nav-item <?php echo $this->uri->segment(1) == '' ? 'active' : ''; ?>"><a href="<?= base_url(); ?>" class="nav-link">Beranda</a></li>
+            <li class="nav-item <?php echo $this->uri->segment(1) == 'lowongan' ? 'active' : ''; ?>"><a href="<?= base_url('lowongan'); ?>" class="nav-link">Lowongan</a></li>
+            <li class="nav-item <?php echo $this->uri->segment(1) == 'daftar-akun' ? 'active' : ''; ?> <?= ($this->session->userdata('logged_in') ? 'd-none' : ''); ?>"><a href="<?= base_url('register'); ?>" class="nav-link">Daftar Akun</a></li>
+            <li class="nav-item <?php echo $this->uri->segment(1) == 'status-lamaran' ? 'active' : ''; ?> <?= ($this->session->userdata('logged_in') ? '' : 'd-none'); ?>"><a href="<?= base_url('status-lamaran'); ?>" class="nav-link">Status Lamaran</a></li>
           </ul>
         </div>
         <ul class="navbar-nav ml-auto">

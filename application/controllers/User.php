@@ -151,7 +151,7 @@ class User extends CI_Controller {
 		}
 	}
 	
-	public function pengerjaan_tes()
+	public function pengerjaan_tes($id_lamaran)
 	{
 		$this->load->model(['Model_soal']);
 
@@ -160,12 +160,41 @@ class User extends CI_Controller {
 		$data = [
 			'title' 		=> 'Pengerjaan Tes',
 			'page' 			=> 'pengerjaan_tes',
-			'soals' 		=> $soal_data					
+			'soals' 		=> $soal_data,					
+			'id_lamaran' 		=> $id_lamaran					
 		];
 
 			$this->load->view('templates/user/index.php', $data);
 			$this->load->view('function/user/soal.php');
 
+	}
+
+	public function proses_pengerjaan_tes()
+	{
+		$this->load->model(['Model_lamaran']);
+		$this->load->model(['Model_pelamar']);
+
+		$pelamar = $this->Model_pelamar->by('id_user',$this->session->userdata('id'))->row_array();
+
+		$id_lamaran = $this->input->post('id_lamaran');
+		$nilai_tes = $this->input->post('nilai');
+
+		$data = array(
+			'nilai_tes'  => $nilai_tes,
+			'status_lamaran'  => 'Proses',
+			'tgl_tes'  => Date('Y-m-d H:i:s'),
+		);
+
+		$where = array(
+			'id' => $id_lamaran,
+			'id_pelamar' => $pelamar['id'],
+		);
+
+		if($this->Model_lamaran->update_by_id($where, $data, 'lamaran')){
+			echo "success";
+		} else{
+			echo "error";
+		}
 	}
 
 	public function status_lamaran()
@@ -176,7 +205,7 @@ class User extends CI_Controller {
 		$id_user  = $this->session->userdata('id');
 		$pelamar = $this->Model_pelamar->by('id_user', $id_user)->row_array();
 
-		$lamaran_data	=	$this->Model_lamaran->by('id_pelamar', $pelamar['id'])->result_array();
+		$lamaran_data	=	$this->Model_lamaran->status_lamaran_by('id_pelamar', $pelamar['id'])->result_array();
 		$data = [
 			'title' 		=> 'Status Lamaran',
 			'page' 			=> 'status_lamaran',

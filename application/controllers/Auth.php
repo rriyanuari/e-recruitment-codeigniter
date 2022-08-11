@@ -50,7 +50,7 @@ class Auth extends CI_Controller {
         'password'       => $this->input->post('password'),
         'role'           => 1,
         );
-      $insert2 = $this->Model_user->tambah($data2,'user');
+      $insert2 = $this->Model_user->tambah($data2,'t_user');
       $last_id = $this->db->insert_id();
 
       if($insert2){

@@ -50,10 +50,9 @@
                   $(`#upload_cv`).val('');
                   alert('Akun berhasil dibuat');
                   window.location.href =`<?php echo base_url()?>`;
-                  console.log(data.msg)
+                  alert(data.msg)
               }else{
                   alert(data.msg);
-                  console.log(data.msg);
               }
           }
           });
