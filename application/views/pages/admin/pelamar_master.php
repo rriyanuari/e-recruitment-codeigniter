@@ -16,6 +16,7 @@
 							<th width="" class="text-center">Yang Dilamar</th>
 							<th width="20%" class="text-center">Status</th>
 							<th width="" class="text-center">CV</th>
+							<th width="" class="text-center">Nilai</th>
 							<th width="15%" class="text-center">Tgl Lamaran</th>
               <th width="15%" class="text-center">Action</th>
             </tr>
@@ -57,12 +58,16 @@
                   <i class="fas fa-eye"></i> Lihat CV
                 </a>  
               </td>
-              <td class="text-right"><?= date( 'd-m-Y', strtotime($lamaran['tgl_dibuat'])); ?></td>
+              <td><?= $lamaran['nilai_tes']; ?></td>
+              <td class="text-right"><?= date( 'd-m-Y', strtotime($lamaran['tgl_lamaran'])); ?></td>
               <td class="project-actions text-center">
                 <button class="btn btn-sm btn-icon btn-success tmb_lulus mr-2 
-                  <?= ($lamaran['status_lamaran'] == 'Tidak Lulus' || $lamaran['status_lamaran'] == 'Lulus' || $lamaran['status_lamaran'] == 'Tes') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>">
+                  <?= ($lamaran['status_lamaran'] == 'Tidak Lulus' || $lamaran['status_lamaran'] == 'Lulus' || $lamaran['status_lamaran'] == 'Tes') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>"
+                  data-toggle="tooltip" data-placement="top" title="Lulus">
                   <i class="fas fa-check-circle"></i>
-                </button><button class="btn btn-sm btn-icon btn-danger tmb_gagal <?= ($lamaran['status_lamaran'] == 'Tidak Lulus' || $lamaran['status_lamaran'] == 'Lulus') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>">
+                </button>
+                <button class="btn btn-sm btn-icon btn-danger tmb_gagal <?= ($lamaran['status_lamaran'] == 'Tidak Lulus' || $lamaran['status_lamaran'] == 'Lulus') ? 'd-none' : '' ?>" id="<?= $lamaran['id'] ?>"
+                data-toggle="tooltip" data-placement="top" title="Tidak Lulus">
                   <i class="fas fa-times-circle"></i>
                 </button>
               </td>

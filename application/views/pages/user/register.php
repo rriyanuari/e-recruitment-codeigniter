@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="upload_cv">Upload CV</label>
+                  <label for="upload_cv">Upload CV (maks 5mb, hanya berformat .pdf)</label>
                   <input type="file" class="form-control-file" id="upload_cv">          
                 </div>
 
